@@ -36,9 +36,9 @@
           shellHook = ''
             echo "🚀 Go development environment loaded!"
             echo "Available commands:"
-            echo "  go run main.go [text] - Run the CLI tool"
+            echo "  nix run - Run the CLI tool"
             echo "  golangci-lint run - Run linter"
-            echo "  treefmt - Format code"
+            echo "  nix fmt - Format code"
           '';
         };
 
@@ -46,7 +46,12 @@
           pname = "ccusage-rainbow";
           version = "0.1.0";
           src = ./.;
-          vendorHash = null;
+          vendorHash = "sha256-LWY1Tnh4iyNAV7dNjlKdT9IwPJRN25HkEAGSkQIRe9I=";
+        };
+
+        apps.default = {
+          type = "app";
+          program = "${self.packages.${system}.default}/bin/ccusage-rainbow";
         };
       }
     );

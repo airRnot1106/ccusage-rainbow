@@ -20,6 +20,9 @@ go run main.go                 # Run with real cost data from ccusage
 go run main.go --test          # Run with test data ($9999.99)
 go run main.go --custom --text "HELLO"  # Run with custom text
 go build -o ccusage-rainbow    # Build binary
+nix build                      # Build with Nix
+nix run                        # Build and run with Nix
+./result/bin/ccusage-rainbow   # Run Nix-built binary
 ```
 
 **Code Quality:**
