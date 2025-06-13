@@ -31,6 +31,15 @@ gofumpt -w .                   # Format Go code
 nix fmt                        # Format all code (Go, Nix, etc.)
 ```
 
+**Git Hooks (Pre-commit):**
+```bash
+# Automatically installed when entering nix develop
+# Runs on every commit:
+# - treefmt (formatting)
+# - golangci-lint (linting) 
+# - go test (testing)
+```
+
 **Testing:**
 ```bash
 go test ./...                  # Run all tests
@@ -126,3 +135,9 @@ Domain Interfaces ← Domain Entities
 - CI runs on all PRs and main branch pushes
 - Uses Nix for reproducible builds and testing
 - Verifies binary functionality with `--help` test
+
+**Git Hooks (cachix/git-hooks.nix):**
+- Pre-commit hooks automatically installed via `nix develop`
+- Runs treefmt, golangci-lint, and go test before each commit
+- Ensures code quality and consistency
+- Prevents broken commits from entering the repository
