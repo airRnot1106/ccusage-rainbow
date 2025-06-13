@@ -2,6 +2,8 @@
 
 Tool to display ccusage in a gorgeous way
 
+https://github.com/user-attachments/assets/7f3e5983-3f73-4515-b32a-18853f7cc896
+
 ## 🚀 Quick Start
 
 ### Using Nix (Recommended)
