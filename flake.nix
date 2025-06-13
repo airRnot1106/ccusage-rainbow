@@ -1,5 +1,5 @@
 {
-  description = "ccusage-rainbow - Go CLI tool for ASCII art text display";
+  description = "ccusage-rainbow - CLI tool for ASCII art text display";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
