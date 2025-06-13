@@ -1,0 +1,61 @@
+# GitHub Dependabot configuration for ccusage-rainbow
+# See: https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  # Go module dependencies
+  - package-ecosystem: "gomod"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 5
+    reviewers:
+      - "your-username"  # Replace with actual GitHub username
+    assignees:
+      - "your-username"  # Replace with actual GitHub username
+    commit-message:
+      prefix: "deps"
+      prefix-development: "deps-dev"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "go"
+    # Group minor and patch updates together to reduce PR noise
+    groups:
+      go-dependencies:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "github.com/charmbracelet/*"  # Keep UI framework updates separate
+        update-types:
+          - "minor"
+          - "patch"
+      charmbracelet-updates:
+        patterns:
+          - "github.com/charmbracelet/*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # GitHub Actions (if any are added in future)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "UTC"
+    open-pull-requests-limit: 3
+    reviewers:
+      - "your-username"  # Replace with actual GitHub username
+    assignees:
+      - "your-username"  # Replace with actual GitHub username
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "github-actions"

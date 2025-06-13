@@ -112,3 +112,17 @@ Domain Interfaces ← Domain Entities
 - Rainbow uses exactly 7 colors in fixed order
 - Character offset creates wave effect across text
 - Animation timing controlled via Bubble Tea model updates
+
+## Dependency Management
+
+**Dependabot Configuration:**
+- Go modules updated weekly on Mondays
+- Minor/patch updates auto-merged after CI passes
+- Major updates require manual review
+- Charm UI libraries grouped separately
+- Auto-merge only triggers if build, tests, and linting pass
+
+**GitHub Actions:**
+- CI runs on all PRs and main branch pushes
+- Uses Nix for reproducible builds and testing
+- Verifies binary functionality with `--help` test
