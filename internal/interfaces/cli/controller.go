@@ -26,32 +26,37 @@ func NewController(rainbowUseCase *rainbow.RainbowTextUseCase, costUseCase *cost
 
 // CreateRootCommand creates the root cobra command
 func (c *Controller) CreateRootCommand() *cobra.Command {
-	var useCustomText bool
-	var textContent string
+	var useBankruptMode bool
+	var useHiMode bool
 
 	rootCmd := &cobra.Command{
 		Use:   "ccusage-rainbow",
 		Short: "Display rainbow colored total cost from ccusage",
 		Long:  "A CLI tool that fetches total cost from ccusage and displays it as large ASCII text with animated rainbow colors",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return c.runTUI(useCustomText, textContent)
+			return c.runTUI(useBankruptMode, useHiMode)
 		},
 	}
 
-	rootCmd.Flags().BoolVarP(&useCustomText, "custom", "c", false, "Use custom text instead of fetching cost data")
-	rootCmd.Flags().StringVarP(&textContent, "text", "t", "HELLO", "Custom text to display (only used with --custom flag)")
+	rootCmd.Flags().BoolVarP(&useBankruptMode, "bankrupt", "", false, "")
+	_ = rootCmd.Flags().MarkHidden("bankrupt")
+	rootCmd.Flags().BoolVarP(&useHiMode, "hi", "", false, "")
+	_ = rootCmd.Flags().MarkHidden("hi")
 
 	return rootCmd
 }
 
 // runTUI starts the TUI application
-func (c *Controller) runTUI(useCustomText bool, textContent string) error {
+func (c *Controller) runTUI(useBankruptMode bool, useHiMode bool) error {
 	var text *entities.Text
 	var err error
 
-	if useCustomText {
-		// Use custom text provided by user
-		text = entities.NewText(textContent)
+	if useHiMode {
+		// Hidden option to display "HELLO"
+		text = entities.NewText("HELLO")
+	} else if useBankruptMode {
+		// Hidden bankrupt mode - display large cost
+		text = entities.NewText("$9999.99")
 	} else {
 		// Fetch cost data and format it
 		text, err = c.costUseCase.GetCostText()
