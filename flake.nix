@@ -23,20 +23,8 @@
         treefmtEval = treefmt-nix.lib.evalModule pkgs ./nix/treefmt.nix;
 
         # Git hooks configuration
-        git-hooks-check = git-hooks.lib.${system}.run {
-          src = ./.;
-          hooks = {
-            # Use treefmt for pre-commit formatting
-            treefmt = {
-              enable = true;
-              package = treefmtEval.config.build.wrapper;
-            };
-            # Run golangci-lint on commit
-            golangci-lint.enable = true;
-            # Run gotest on commit
-            gotest.enable = true;
-          };
-        };
+        git-hooks-config = import ./nix/git-hooks.nix { inherit treefmtEval; };
+        git-hooks-check = git-hooks.lib.${system}.run git-hooks-config;
       in
       {
         formatter = treefmtEval.config.build.wrapper;
@@ -68,7 +56,7 @@
 
         packages.default = pkgs.buildGoModule {
           pname = "ccusage-rainbow";
-          version = "0.1.0";
+          version = "0.0.1";
           src = ./.;
           vendorHash = "sha256-LWY1Tnh4iyNAV7dNjlKdT9IwPJRN25HkEAGSkQIRe9I=";
         };
