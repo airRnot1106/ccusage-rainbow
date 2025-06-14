@@ -1,10 +1,9 @@
 package main
 
 import (
+	"ccusage-rainbow/internal/frameworks/di"
 	"fmt"
 	"os"
-
-	"ccusage-rainbow/internal/frameworks/di"
 )
 
 func main() {

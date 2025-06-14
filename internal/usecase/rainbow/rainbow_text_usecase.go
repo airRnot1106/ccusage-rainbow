@@ -1,10 +1,9 @@
 package rainbow
 
 import (
-	"time"
-
 	"ccusage-rainbow/internal/domain/entities"
 	"ccusage-rainbow/internal/domain/interfaces"
+	"time"
 )
 
 // RainbowTextUseCase handles the business logic for displaying animated rainbow text

@@ -1,12 +1,11 @@
 package tui
 
 import (
-	"strings"
-	"time"
-
 	"ccusage-rainbow/internal/domain/entities"
 	"ccusage-rainbow/internal/domain/interfaces"
 	"ccusage-rainbow/internal/usecase/rainbow"
+	"strings"
+	"time"
 
 	tea "github.com/charmbracelet/bubbletea"
 )

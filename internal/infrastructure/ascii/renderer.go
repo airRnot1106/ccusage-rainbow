@@ -1,10 +1,10 @@
 package ascii
 
 import (
-	"strings"
-
 	"ccusage-rainbow/internal/domain/entities"
 	"ccusage-rainbow/internal/domain/interfaces"
+	"strings"
+
 	"github.com/charmbracelet/lipgloss"
 )
 

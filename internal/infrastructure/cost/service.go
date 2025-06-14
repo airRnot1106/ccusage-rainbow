@@ -1,10 +1,9 @@
 package cost
 
 import (
+	"ccusage-rainbow/internal/domain/entities"
 	"encoding/json"
 	"os/exec"
-
-	"ccusage-rainbow/internal/domain/entities"
 )
 
 // Service implements the CostService interface

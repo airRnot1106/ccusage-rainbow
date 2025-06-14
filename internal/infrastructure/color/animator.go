@@ -1,9 +1,9 @@
 package color
 
 import (
+	"ccusage-rainbow/internal/domain/entities"
 	"strings"
 
-	"ccusage-rainbow/internal/domain/entities"
 	"github.com/charmbracelet/lipgloss"
 )
 
