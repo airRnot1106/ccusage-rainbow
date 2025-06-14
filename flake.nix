@@ -5,6 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     treefmt-nix.url = "github:numtide/treefmt-nix";
+    git-hooks.url = "github:cachix/git-hooks.nix";
   };
 
   outputs =
@@ -13,32 +14,55 @@
       nixpkgs,
       flake-utils,
       treefmt-nix,
+      git-hooks,
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
         treefmtEval = treefmt-nix.lib.evalModule pkgs ./nix/treefmt.nix;
+
+        # Git hooks configuration
+        git-hooks-check = git-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            # Use treefmt for pre-commit formatting
+            treefmt = {
+              enable = true;
+              package = treefmtEval.config.build.wrapper;
+            };
+            # Run golangci-lint on commit
+            golangci-lint.enable = true;
+            # Run gotest on commit
+            gotest.enable = true;
+          };
+        };
       in
       {
         formatter = treefmtEval.config.build.wrapper;
         checks.formatting = treefmtEval.config.build.check self;
+        checks.pre-commit-check = git-hooks-check;
 
         devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            go
-            gopls
-            golangci-lint
-            gofumpt
-            treefmtEval.config.build.wrapper
-          ];
+          buildInputs =
+            with pkgs;
+            [
+              go
+              gopls
+              golangci-lint
+              gofumpt
+              treefmtEval.config.build.wrapper
+            ]
+            ++ git-hooks-check.enabledPackages;
 
           shellHook = ''
+            ${git-hooks-check.shellHook}
             echo "🚀 Go development environment loaded!"
             echo "Available commands:"
             echo "  nix run - Run the CLI tool"
             echo "  golangci-lint run - Run linter"
             echo "  nix fmt - Format code"
+            echo "  Git hooks enabled: treefmt, golangci-lint"
           '';
         };
 
