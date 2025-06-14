@@ -40,7 +40,6 @@
               go
               gopls
               golangci-lint
-              gofumpt
               treefmtEval.config.build.wrapper
             ]
             ++ git-hooks-check.enabledPackages;
@@ -52,7 +51,6 @@
             echo "  nix run - Run the CLI tool"
             echo "  golangci-lint run - Run linter"
             echo "  nix fmt - Format code"
-            echo "  Git hooks enabled: treefmt, golangci-lint, gotest"
           '';
         };
 
