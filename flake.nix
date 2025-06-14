@@ -23,7 +23,9 @@
         treefmtEval = treefmt-nix.lib.evalModule pkgs ./nix/treefmt.nix;
 
         # Git hooks configuration
-        git-hooks-config = import ./nix/git-hooks.nix { inherit treefmtEval; };
+        git-hooks-config = import ./nix/git-hooks.nix {
+          inherit treefmtEval;
+        };
         git-hooks-check = git-hooks.lib.${system}.run git-hooks-config;
       in
       {
@@ -50,7 +52,7 @@
             echo "  nix run - Run the CLI tool"
             echo "  golangci-lint run - Run linter"
             echo "  nix fmt - Format code"
-            echo "  Git hooks enabled: treefmt, golangci-lint"
+            echo "  Git hooks enabled: treefmt, golangci-lint, gotest"
           '';
         };
 

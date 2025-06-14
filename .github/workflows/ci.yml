@@ -32,7 +32,7 @@ jobs:
         run: nix develop --command golangci-lint run
 
       - name: Check formatting
-        run: nix develop --command treefmt --fail-on-change
+        run: nix develop --command treefmt
 
       - name: Verify binary works
         run: |

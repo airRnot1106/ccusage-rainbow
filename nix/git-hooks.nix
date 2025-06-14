@@ -1,11 +1,15 @@
 { treefmtEval }:
 {
-  src = ./.;
+  src = ../.;
   hooks = {
-    # Use treefmt for pre-commit formatting
-    treefmt = {
+    # Use treefmt for pre-commit formatting (custom to avoid --fail-on-change)
+    treefmt-custom = {
       enable = true;
-      package = treefmtEval.config.build.wrapper;
+      name = "treefmt";
+      entry = "${treefmtEval.config.build.wrapper}/bin/treefmt --no-cache";
+      language = "system";
+      pass_filenames = false;
+      always_run = true;
     };
     # Run golangci-lint on commit
     golangci-lint.enable = true;

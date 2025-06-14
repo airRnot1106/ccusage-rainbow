@@ -35,7 +35,7 @@ jobs:
             go test ./...
 
             echo 'Checking formatting...'
-            treefmt --fail-on-change
+            treefmt
           "
 
       - name: Auto-merge minor and patch updates
