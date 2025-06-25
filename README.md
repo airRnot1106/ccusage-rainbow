@@ -1,3 +1,10 @@
+# ⚠️ Archived
+
+This repository is archived and no longer actively maintained.  
+Please see the new home of the project:
+
+👉 https://github.com/airRnot1106/ccusage-gorgeous
+
 # ccusage-rainbow 🌈
 
 Tool to display ccusage in a gorgeous way
